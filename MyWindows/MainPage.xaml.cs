@@ -25,19 +25,48 @@ namespace MyWindows
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        #region 初期設定
+        private CS_GetkenAsync getken;
+        #endregion
+
         public MainPage()
         {
             this.InitializeComponent();
+
+            getken = new CS_GetkenAsync();
+
+            textBox01.Text = "";
+            textBox02.Text = "";
+
+            ClearResultTextBox();			// 初期表示をクリアする
         }
 
-        private void button01_Click(object sender, RoutedEventArgs e)
-        {
+        #region ［Ｇｅｔｋｅｎ］ボタン押下
+        private async void button01_Click(object sender, RoutedEventArgs e)
+        {   // [Getken]ボタン押下
+            //            WriteLineResult("\n[Getken]ボタン押下");
+            String KeyWord = textBox02.Text;
 
+            await getken.ClearAsync();
+            getken.Wbuf = textBox02.Text;
+            await getken.ExecAsync();
+
+            WriteLineResult("\nResult :");
+            for (int i = 0; i < getken.Array.Length; i++)
+            {
+                WriteLineResult("\n [{0}] : [{1}]", i, getken.Array[i]);
+            }
         }
+        #endregion
 
+        #region ［Ｒｅｓｅｔ］ボタン押下
         private void button02_Click(object sender, RoutedEventArgs e)
-        {
+        {   // [Reset]ボタン押下
+            ClearResultTextBox();			// 初期表示をクリアする
 
+            textBox01.Text = "";
+            textBox02.Text = "";
         }
+        #endregion
     }
 }

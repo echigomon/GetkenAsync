@@ -14,9 +14,9 @@ namespace GetkenAsync
         // '16.01.13 両側余白情報削除の追加　及び、右側・左側余白処理のコメント化
         CS_LRskipAsync lrskip;           // 両側余白情報を削除
 
-        private String _wbuf;       // ソース情報
-        private Boolean _empty;     // ソース情報有無
-        private int _wcnt;          // トークン登録数
+        private static String _wbuf;       // ソース情報
+        private static Boolean _empty;     // ソース情報有無
+        private static int _wcnt;          // トークン登録数
         public String Wbuf
         {
             get
@@ -65,7 +65,7 @@ namespace GetkenAsync
                 _wcnt = value;
             }
         }
-        private char[] _trim = { ' ', '\t', '\r', '\n' };
+        private static readonly char[] _trim = { ' ', '\t', '\r', '\n' };
         #endregion
 
         #region コンストラクタ
